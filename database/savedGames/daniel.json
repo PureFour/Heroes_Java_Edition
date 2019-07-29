@@ -1,0 +1,29 @@
+{
+  "x": 0,
+  "y": 0,
+  "gold": 0,
+  "name": "daniel",
+  "hp": 50,
+  "maxHp": 50,
+  "mana": 0,
+  "maxMana": 0,
+  "ad": 20,
+  "ap": 0,
+  "def": 5,
+  "lvl": 1,
+  "exp": 0,
+  "expToNextLvl": 16,
+  "strength": 2,
+  "vitality": 3,
+  "dexterity": 5,
+  "intelligence": 0,
+  "luck": 4,
+  "inventory": {
+    "storage": {},
+    "maxSize": 5
+  },
+  "equipment": {
+    "storage": {},
+    "maxSize": 5
+  }
+}

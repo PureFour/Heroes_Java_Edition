@@ -1,0 +1,29 @@
+{
+  "x": 0,
+  "y": 0,
+  "gold": 0,
+  "name": "da",
+  "hp": 100,
+  "maxHp": 100,
+  "mana": 0,
+  "maxMana": 0,
+  "ad": 12,
+  "ap": 0,
+  "def": 10,
+  "lvl": 1,
+  "exp": 0,
+  "expToNextLvl": 16,
+  "strength": 6,
+  "vitality": 6,
+  "dexterity": 4,
+  "intelligence": 0,
+  "luck": 2,
+  "inventory": {
+    "storage": {},
+    "maxSize": 5
+  },
+  "equipment": {
+    "storage": {},
+    "maxSize": 5
+  }
+}
