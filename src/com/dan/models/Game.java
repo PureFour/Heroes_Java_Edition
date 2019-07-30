@@ -1,5 +1,6 @@
 package com.dan.models;
 
+import static com.dan.utils.FunctionHelper.clearScreen;
 import static com.dan.utils.FunctionHelper.getOption;
 import static com.dan.utils.FunctionHelper.randomizeAttribute;
 import static com.dan.utils.GameSaver.loadCharacter;
@@ -26,7 +27,7 @@ public class Game implements Runnable {
 	private boolean running = false;
 
 	// methods
-	private void fight() throws InterruptedException { //TODO poprawic formatowanie !!!
+	private void fight() { //TODO poprawic formatowanie !!!
 		short HP = enemy.getHp();
 		System.out.println("FIGHT!\n");
 		byte i = 1;
@@ -37,13 +38,12 @@ public class Game implements Runnable {
 			System.out.println("Enemy HP= " + enemy.getHp());
 			System.out.println("=".repeat(WIDTH));
 			enemy.attack(hero);
-			sleep(500);
 			System.out.println("+".repeat(WIDTH));
 			System.out.println("Your actions:\n(1) Attack Enemy!\n(2) Drink Potions!\n" + (hero.getHp() < 25 ? "(3) RUN AWAY!" : ""));
 			switch (getOption(3)) {
 				case 1:
 					hero.attack(enemy);
-					sleep(500);
+					clearScreen();
 					break;
 				case 2: //TODO zaimplementowac !
 					System.out.println("Choose potion...");
@@ -102,7 +102,7 @@ public class Game implements Runnable {
 	public Game() {
 		this.hero = initHero(getName());
 		this.hero.setGold((short) 1000);
-		this.shop.initialize();
+		this.shop.initialize(this.hero);
 		startMessage();
 		this.running = true;
 	}
@@ -168,23 +168,27 @@ public class Game implements Runnable {
 			case 1:
 				enemy = enemy.spawnEnemy();
 				fight();
+				clearScreen();
 				break;
 			case 2:
 				shop.menu(hero);
+				clearScreen();
 				break;
 			case 3:
 				showInventory(hero);
+				clearScreen();
 				break;
 			case 4:
 				break;
 			case 5:
 				hero.levelUp();
+				clearScreen();
 				break;
 			case 6:
 				saveCharacterAsJSON(hero); //TODO nie zapisuje sie od razu !
 				break;
 			case 7:
-				this.hero = loadCharacter();
+//				this.hero = loadCharacter();
 				break;
 			case 8:
 				this.running = false;

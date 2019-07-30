@@ -10,10 +10,12 @@ import java.util.stream.IntStream;
 
 import com.dan.modelsAbstract.Item;
 import lombok.Builder;
+import lombok.Getter;
 
 public class Boots extends Item {
 
-	private byte dex;
+	@Getter
+	private byte dexterity;
 
 	public Boots() {
 	}
@@ -22,7 +24,7 @@ public class Boots extends Item {
 	public Boots(int id, String name, int buyValue, int dex) {
 
 		super(id, name, buyValue);
-		this.dex = (byte) dex;
+		this.dexterity = (byte) dex;
 	}
 
 	@Override
@@ -30,21 +32,17 @@ public class Boots extends Item {
 		System.out.println(this);
 	}
 
-	public List<Item> init(int offset) {
+	public List<Item> init(int offset) throws IOException {
 		ArrayList<Item> list = new ArrayList<>();
-		try {
-			List<String> bootsNames = getItemsNames("boots");
-			IntStream.range(1, bootsNames.size())
-				.forEach(i -> list.add(new BootsBuilder()
-					.id(i + offset)
-					.name(bootsNames.get(i))
-					.buyValue(3 * i)
-					.dex(1 + getRandomNumber((byte) i))
-					.build()
-				));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<String> bootsNames = getItemsNames("boots");
+		IntStream.range(1, bootsNames.size())
+			.forEach(i -> list.add(new BootsBuilder()
+				.id(i + offset)
+				.name(bootsNames.get(i))
+				.buyValue(3 * i)
+				.dex(1 + getRandomNumber((byte) i))
+				.build()
+			));
 		return list;
 	}
 }

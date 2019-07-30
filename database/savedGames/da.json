@@ -1,7 +1,7 @@
 {
   "x": 0,
   "y": 0,
-  "gold": 0,
+  "gold": 895,
   "name": "da",
   "hp": 100,
   "maxHp": 100,
@@ -19,7 +19,27 @@
   "intelligence": 0,
   "luck": 2,
   "inventory": {
-    "storage": {},
+    "storage": {
+      "8": {
+        "ad": 21,
+        "id": 8,
+        "name": "Wicked Swiftblade",
+        "buyValue": 37,
+        "sellValue": 18,
+        "bonus": {
+          "name": "deadly",
+          "field": "luck",
+          "value": 1
+        }
+      },
+      "1": {
+        "ad": 9,
+        "id": 1,
+        "name": "Godslayer",
+        "buyValue": 9,
+        "sellValue": 4
+      }
+    },
     "maxSize": 5
   },
   "equipment": {

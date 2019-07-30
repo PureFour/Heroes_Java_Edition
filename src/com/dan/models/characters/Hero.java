@@ -113,25 +113,23 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 				this.equipment.addItem(item);
 				this.inventory.removeItem(item.getId());
 				//stats UP
-				this.ad += 5;
-				Class itemClass = item.getClass();
-				Method[] itemGetters = itemClass.getDeclaredMethods();
-
-				List.of(itemGetters).stream()
-					.filter(method -> method.getName().startsWith("get"))
-					.forEach(method -> System.out.println(method.getName()));
-
+				Class<?> itemClass = item.getClass();
+				Class<?> heroClass = Hero.class;
 				Field[] itemFields = itemClass.getDeclaredFields();
-				Class heroClass = this.getClass();
-				try {
-					Object value = heroClass.getField("ad").get(Byte.class);
-					System.out.println("Value: " + value);
-				} catch (IllegalAccessException | NoSuchFieldException e) {
-					e.printStackTrace();
-				}
-				List.of(itemFields)
-					.forEach(field -> System.out.println(field.getName()));
-				//
+				List.of(itemFields).forEach(itemField -> {
+						try {
+							itemField.setAccessible(true);
+							Field heroAd = heroClass.getDeclaredField(itemField.getName());
+							heroAd.setAccessible(true);
+							Byte value = (byte) (itemField.getByte(item) + heroAd.getByte(this));
+							heroAd.set(this, value);
+						} catch (NoSuchFieldException | IllegalAccessException s) {
+							s.printStackTrace();
+						}
+					}
+				);
+				System.out.println("Hero AD: " + this.ad);
+				System.out.println("Hero DEX: " + this.dexterity);
 			}
 		} else {
 			System.out.println("Taking off an item ...");

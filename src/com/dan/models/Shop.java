@@ -3,6 +3,7 @@ package com.dan.models;
 import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getOption;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import com.dan.models.characters.Hero;
@@ -29,9 +30,10 @@ public class Shop implements ItemStorage {
 			System.out.println("What do you want? YOUR GOLD: " + hero.getGold());
 			System.out.println("(1) BUY ITEMS");
 			System.out.println("(2) SELL ITEMS");
-			System.out.println("(3) QUIT");
-			switch (getOption(3)) {
-				case 3:
+			System.out.println("(3) REFRESH ITEMS");
+			System.out.println("(4) QUIT");
+			switch (getOption(4)) {
+				case 4:
 					running = false;
 					break;
 				case 1:
@@ -39,6 +41,9 @@ public class Shop implements ItemStorage {
 					break;
 				case 2:
 					sell(hero);
+					break;
+				case 3:
+					refreshItems(hero);
 					break;
 			}
 		}
@@ -138,14 +143,24 @@ public class Shop implements ItemStorage {
 		}
 	}
 
-	public void initialize() { //TODO zrobic generowanie itemow D:
+	public void initialize(Hero hero) { //TODO zrobic generowanie itemow D:
 		System.out.println("Shop is initializing...");
-		addItems(new MeleeWeapons().init(0));
-		addItems(new Boots().init(this.storage.size()));
+		try {
+			addItems(new MeleeWeapons().init(0, hero));
+//		addItems(new Boots().init(this.storage.size()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void refreshItems() { //TODO zrobic funkcje refresh z generatora
-
+	private void refreshItems(Hero hero) {
+		System.out.println("Do you wanna see new items? (Y/N)");
+		System.out.println("It will be costs 50 G");
+		System.out.println("Your gold: " + hero.getGold());
+		if (getOption("Y", "N") == 0) {
+			hero.setGold((short) (hero.getGold() - 50));
+			initialize(hero);
+		}
 	}
 
 	@Override

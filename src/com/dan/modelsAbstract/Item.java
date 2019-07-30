@@ -2,16 +2,39 @@ package com.dan.modelsAbstract;
 
 import java.io.Serializable;
 
+import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public abstract class Item implements Serializable {
 	private static final long serialVersionUID = -123L;
 
 	private byte id = 0;
+	private String name = "unknown";
 	private short buyValue;
 	private short sellValue;
-	private String name = "unknown";
+	@Setter
+	private Bonus bonus;
+
+	@Getter
+	public static class Bonus {
+		private String name;
+		private String field;
+		private byte value;
+
+		@Builder
+		public Bonus(String name, String field, byte value) {
+			this.name = name;
+			this.field = field;
+			this.value = value;
+		}
+
+		@Override
+		public String toString() {
+			return name + " (" + field + " + " + value + ')';
+		}
+	}
 
 	public Item() {
 	}
@@ -31,7 +54,7 @@ public abstract class Item implements Serializable {
 			"=".repeat(50) + '\n' +
 				"Item id: " + getId() +
 				"\nItem name: " + getName() +
+				(bonus != null ? "\nBONUS: " + getBonus() : "") +
 				"\nItem price: " + getBuyValue();
 	}
-
 }

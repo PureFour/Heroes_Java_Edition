@@ -3,10 +3,9 @@ package com.dan.utils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 
+import com.dan.modelsAbstract.Item;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -17,9 +16,18 @@ public class JsonParser { //TODO zmienic nazwy jsonow !
 		String content = new String(Files.readAllBytes(Paths.get(ITEMS_JPATH + itemName + ".json")));
 		JSONObject object = new JSONObject(content);
 		JSONArray array = object.getJSONArray("names");
-		List<String> names = new ArrayList<>();
-		IntStream.range(0, array.length())
-			.forEach(i -> names.add(array.get(i).toString()));
-		return names;
+		return FunctionHelper.getRandomElements(array, 10);
+	}
+
+	public static Item.Bonus getItemsBonus(String itemName) throws IOException {
+		String content = new String(Files.readAllBytes(Paths.get(ITEMS_JPATH + itemName + ".json")));
+		JSONObject object = new JSONObject(content);
+		JSONArray array = object.getJSONArray("bonuses");
+		JSONObject randomBonus = FunctionHelper.getRandomElement(array);
+		return Item.Bonus.builder()
+			.name(randomBonus.get("name").toString())
+			.value((byte) randomBonus.getInt("value"))
+			.field(randomBonus.getString("field"))
+			.build();
 	}
 }

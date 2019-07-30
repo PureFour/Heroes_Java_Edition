@@ -1,14 +1,34 @@
 package com.dan.utils;
 
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-import com.dan.models.characters.Hero;
+import com.dan.modelsAbstract.Item;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public final class FunctionHelper {
+
+	public static void clearScreen() {
+		System.out.print("\033[H\033[2J");
+	}
+
+	public static List<String> getRandomElements(JSONArray list,
+		int totalItems) {
+		List<String> newList = new ArrayList<>();
+		for (int i = 0; i < totalItems; i++) {
+			int randomIndex = new Random().nextInt(list.length());
+			newList.add(list.get(randomIndex).toString());
+			list.remove(randomIndex);
+		}
+		return newList;
+	}
+
+	public static JSONObject getRandomElement(JSONArray array) {
+		return (JSONObject) array.get(new Random().nextInt(array.length()));
+	}
 
 	public static byte getOption(int options) {
 		final Scanner scanner = new Scanner(System.in);
@@ -54,30 +74,15 @@ public final class FunctionHelper {
 	}
 
 	public static byte getRandomNumber(byte range) {
-		return (byte) new Random().nextInt(range);
+		return (byte) new Random().nextInt(range + 1); // +1 this is temporary solution !
 	}
 
 	public static byte randomizeAttribute(byte attribute) {
 		return (byte) new Random().nextInt(attribute);
 	}
 
-	public static Object runGetter(Field field, Hero o) {
-		// MZ: Find the correct method
-		for (Method method : o.getClass().getMethods()) {
-			if ((method.getName().startsWith("get")) && (method.getName().length() == (field.getName().length() + 3))) {
-				if (method.getName().toLowerCase().endsWith(field.getName().toLowerCase())) {
-					// MZ: Method found, run it
-					try {
-						return method.invoke(o);
-					} catch (IllegalAccessException | InvocationTargetException e) {
-						System.out.println("Could not determine method: " + method.getName());
-					}
-
-				}
-			}
-		}
-
-		return null;
+	public static boolean getChance(float probability) { // 0-100 %    // nazwa metody ???
+		double randomValue = Math.random() * 100;  //0.0 to 99.9
+		return randomValue <= probability;
 	}
-
 }

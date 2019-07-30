@@ -20,5 +20,22 @@
     "Witherbrand, Sculptor of Invocation",
     "Godslayer",
     "Barbarian Greatsword"
+  ],
+  "bonuses": [
+    {
+      "name": "deadly",
+      "field": "luck",
+      "value": 1
+    },
+    {
+      "name": "lethal",
+      "field": "luck",
+      "value": 2
+    },
+    {
+      "name": "strong",
+      "field": "ad",
+      "value": 5
+    }
   ]
 }

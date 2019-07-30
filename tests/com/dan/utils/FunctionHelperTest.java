@@ -17,4 +17,11 @@ class FunctionHelperTest {
 	void reflexMethodTest() {
 
 	}
+
+	@Test
+	void clearTermTest() {
+		System.out.println("HellO!!");
+		System.out.println("I hope you will able to see it!");
+		FunctionHelper.clearScreen();
+	}
 }
