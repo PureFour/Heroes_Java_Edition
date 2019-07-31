@@ -23,9 +23,4 @@ public class Inventory implements ItemStorage, Serializable {
 	public byte getMaxSize() {
 		return this.maxSize;
 	}
-
-	public boolean hasItemType(Item item) {
-		return this.storage.values().stream()
-			.anyMatch(type -> type.getClass().getTypeName().equals(item.getClass().getTypeName()));
-	}
 }

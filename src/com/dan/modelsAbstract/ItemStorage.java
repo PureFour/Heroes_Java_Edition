@@ -1,5 +1,6 @@
 package com.dan.modelsAbstract;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 
@@ -71,5 +72,19 @@ public interface ItemStorage {
 		getStorage().forEach(
 			(aByte, item) -> item.show()
 		);
+	}
+
+	default boolean hasItemType(Item item) {
+		return getStorage().values().stream()
+			.anyMatch(type -> type.getClass().getTypeName().equals(item.getClass().getTypeName()));
+	}
+
+	default Item getItemWithTheSameType(Item item) {
+		for (Item it : getStorage().values()) {
+			if (item.getClass().getTypeName().equals(it.getClass().getTypeName())) {
+				return it;
+			}
+		}
+		return null;
 	}
 }

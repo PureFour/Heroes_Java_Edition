@@ -104,35 +104,44 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 		}
 	}
 
-	public void equip(Item item, boolean equipping) { //TODO ogarnac!
-		if (equipping) {
-			System.out.println("Equipping an item ...");
-			if (this.equipment.hasItemType(item)) {
-
-			} else {
-				this.equipment.addItem(item);
-				this.inventory.removeItem(item.getId());
-				//stats UP
-				Class<?> itemClass = item.getClass();
-				Class<?> heroClass = Hero.class;
-				Field[] itemFields = itemClass.getDeclaredFields();
-				List.of(itemFields).forEach(itemField -> {
-						try {
-							itemField.setAccessible(true);
-							Field heroAd = heroClass.getDeclaredField(itemField.getName());
-							heroAd.setAccessible(true);
-							Byte value = (byte) (itemField.getByte(item) + heroAd.getByte(this));
-							heroAd.set(this, value);
-						} catch (NoSuchFieldException | IllegalAccessException s) {
-							s.printStackTrace();
-						}
-					}
-				);
-				System.out.println("Hero AD: " + this.ad);
-				System.out.println("Hero DEX: " + this.dexterity);
-			}
-		} else {
-			System.out.println("Taking off an item ...");
+	public void equip(Item item) {
+		Item tmp;
+		if ((tmp = this.equipment.getItemWithTheSameType(item)) != null) {
+			this.unEquip(tmp);
 		}
+		System.out.println("Equipping an item ...");
+		this.equipment.addItem(item);
+		this.inventory.removeItem(item.getId());
+		equipUtil(item, true);
+	}
+
+	private void equipUtil(Item item, boolean add) {
+		Class<?> itemClass = item.getClass();
+		Class<?> heroClass = Hero.class;
+		Field[] itemFields = itemClass.getDeclaredFields();
+		List.of(itemFields).forEach(itemField -> {
+				try {
+					itemField.setAccessible(true);
+					Field heroField = heroClass.getDeclaredField(itemField.getName());
+					heroField.setAccessible(true);
+					byte value;
+					if (add) {
+						value = (byte) (itemField.getByte(item) + heroField.getByte(this));
+					} else {
+						value = (byte) (heroField.getByte(this) - itemField.getByte(item));
+					}
+					heroField.set(this, value);
+				} catch (NoSuchFieldException | IllegalAccessException s) {
+					s.printStackTrace();
+				}
+			}
+		);
+	}
+
+	public void unEquip(Item item) {
+		System.out.println("Taking off an item ...");
+		this.inventory.addItem(item);
+		this.equipment.removeItem(item.getId());
+		this.equipUtil(item, false);
 	}
 }

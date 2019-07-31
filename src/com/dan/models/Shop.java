@@ -60,28 +60,36 @@ public class Shop implements ItemStorage {
 		System.out.println("(8)Potions");
 		System.out.println("(9)Arrows");
 		System.out.println("(10)GO BACK");
-
 		switch (getOption(10)) {
 			case 1:
 				System.out.println("Melee weapons: ");
 				this.storage.values().stream()
 					.filter(item -> item instanceof MeleeWeapons)
-					.forEach(System.out::println);
+					.forEach(Item::show);
 				break;
 			case 2:
+				break;
 			case 3:
+				break;
 			case 4:
+				break;
 			case 5:
+				break;
 			case 6:
 				System.out.println("Boots: ");
 				this.storage.values().stream()
 					.filter(item -> item instanceof Boots)
-					.forEach(System.out::println);
+					.forEach(Item::show);
 				break;
 			case 7:
+				break;
 			case 8:
+				break;
 			case 9:
+				break;
 			case 10:
+				return;
+			default:
 				break;
 		}
 		buy(hero);
@@ -147,7 +155,7 @@ public class Shop implements ItemStorage {
 		System.out.println("Shop is initializing...");
 		try {
 			addItems(new MeleeWeapons().init(0, hero));
-//		addItems(new Boots().init(this.storage.size()));
+			addItems(new Boots().init(this.storage.size()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -167,4 +175,5 @@ public class Shop implements ItemStorage {
 	public byte getMaxSize() {
 		return 40;
 	}
+
 }

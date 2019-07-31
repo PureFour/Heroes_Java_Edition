@@ -213,13 +213,13 @@ public class Game implements Runnable {
 				System.out.println("What do you want to equip? (Enter index number)");
 				Item item;
 				if ((item = hero.getInventory().getItem(getOption())) != null) {
-					hero.equip(item, true);
+					hero.equip(item);
 				}
 				break;
 			case 2:
 				System.out.println("What do you want to take off? (Enter index number)");
 				if ((item = hero.getEquipment().getItem(getOption())) != null) {
-					hero.equip(item, false);
+					hero.unEquip(item);
 				}
 			case 3:
 				break;

@@ -38,7 +38,6 @@ public final class FunctionHelper {
 				System.out.println("That's not a number!");
 				scanner.next();
 			}
-			System.out.println("Try again!");
 			input = scanner.nextByte();
 		} while (input > options || input < 1);
 		return input;
@@ -52,7 +51,6 @@ public final class FunctionHelper {
 				System.out.println("That's not a number!");
 				scanner.next();
 			}
-			System.out.println("Try again!");
 			input = scanner.nextByte();
 			return input;
 		} while (true);
@@ -61,7 +59,6 @@ public final class FunctionHelper {
 	public static byte getOption(String... options) {
 		final Scanner scanner = new Scanner(System.in);
 		String input;
-		byte choice;
 		while (true) {
 			input = scanner.nextLine();
 			for (int i = 0; i < options.length; i++) {
