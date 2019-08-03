@@ -5,7 +5,6 @@ import static java.lang.Math.pow;
 
 import java.io.Serializable;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.List;
 
 import com.dan.models.Inventory;
@@ -16,6 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
+@Setter
 public abstract class Hero implements Fight<Enemy>, Serializable {
 	private static final long SERIAL_VERSION_UID = 1L;
 	//stats
@@ -106,7 +106,7 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 
 	public void equip(Item item) {
 		Item tmp;
-		if ((tmp = this.equipment.getItemWithTheSameType(item)) != null) {
+		if ((tmp = this.equipment.getItemWithTheSameType(item.getClass())) != null) { // TU!
 			this.unEquip(tmp);
 		}
 		System.out.println("Equipping an item ...");
@@ -126,9 +126,9 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 					heroField.setAccessible(true);
 					byte value;
 					if (add) {
-						value = (byte) (itemField.getByte(item) + heroField.getByte(this));
+						value = (byte) (heroField.getShort(this) + itemField.getShort(item));
 					} else {
-						value = (byte) (heroField.getByte(this) - itemField.getByte(item));
+						value = (byte) (heroField.getShort(this) - itemField.getShort(item));
 					}
 					heroField.set(this, value);
 				} catch (NoSuchFieldException | IllegalAccessException s) {
@@ -136,6 +136,22 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 				}
 			}
 		);
+		//Bonus
+		if (item.getBonus() != null) {
+			try {
+				String fieldName = item.getBonus().getField();
+				Field heroBonusField = heroClass.getDeclaredField(fieldName);
+				byte value;
+				if (add) {
+					value = (byte) (heroBonusField.getByte(this) + item.getBonus().getValue());
+				} else {
+					value = (byte) (heroBonusField.getByte(this) - item.getBonus().getValue());
+				}
+				heroBonusField.set(this, value);
+			} catch (NoSuchFieldException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 	public void unEquip(Item item) {
@@ -143,5 +159,32 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 		this.inventory.addItem(item);
 		this.equipment.removeItem(item.getId());
 		this.equipUtil(item, false);
+	}
+
+	@Override
+	public String toString() {
+		return "Hero{" +
+			"x=" + x +
+			", y=" + y +
+			", gold=" + gold +
+			", name='" + name + '\'' +
+			", hp=" + hp +
+			", maxHp=" + maxHp +
+			", mana=" + mana +
+			", maxMana=" + maxMana +
+			", ad=" + ad +
+			", ap=" + ap +
+			", def=" + def +
+			", lvl=" + lvl +
+			", exp=" + exp +
+			", expToNextLvl=" + expToNextLvl +
+			", strength=" + strength +
+			", vitality=" + vitality +
+			", dexterity=" + dexterity +
+			", intelligence=" + intelligence +
+			", luck=" + luck +
+			", inventory=" + inventory +
+			", equipment=" + equipment +
+			'}';
 	}
 }

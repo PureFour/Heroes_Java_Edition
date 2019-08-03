@@ -79,9 +79,9 @@ public interface ItemStorage {
 			.anyMatch(type -> type.getClass().getTypeName().equals(item.getClass().getTypeName()));
 	}
 
-	default Item getItemWithTheSameType(Item item) {
+	default Item getItemWithTheSameType(Class itemType) {
 		for (Item it : getStorage().values()) {
-			if (item.getClass().getTypeName().equals(it.getClass().getTypeName())) {
+			if (itemType.isInstance(it)) {
 				return it;
 			}
 		}

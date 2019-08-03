@@ -9,9 +9,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public class Enemy implements Fight<Hero> {
+public class Enemy implements Fight<Hero>, Cloneable {
 	//static arrays with sample enemies
-	private final static Enemy[] EASY_ENEMIES = {
+	public final static Enemy[] EASY_ENEMIES = { //public for tests only ...
 		new Enemy("Dog", (short) 10, (byte) 5, (byte) 5, (byte) 1, (byte) 1, (short) 10, (short) 10),
 		new Enemy("Swarm of wasp", (short) 20, (byte) 8, (byte) 6, (byte) 2, (byte) 1, (short) 15, (short) 15),
 		new Enemy("Bat", (short) 10, (byte) 5, (byte) 5, (byte) 1, (byte) 3, (short) 20, (short) 15),
@@ -45,6 +45,11 @@ public class Enemy implements Fight<Hero> {
 	public Enemy() {
 	}
 
+//	@Override
+//	protected Object clone() throws CloneNotSupportedException {
+//		return super.clone();
+//	}
+
 	private Enemy(String name, short hp, byte ad, byte def, byte lvl, byte luck, short expBounty, short goldBounty) {
 		this.name = name;
 		this.hp = hp;
@@ -56,22 +61,22 @@ public class Enemy implements Fight<Hero> {
 		this.goldBounty = goldBounty;
 	}
 
-	public Enemy spawnEnemy() { //TODO trzeba zwracac kopie obiektow...
+	public Enemy spawnEnemy() throws CloneNotSupportedException { //TODO trzeba zwracac kopie obiektow...
 		System.out.println("Which lvl?");
 		System.out.println("(1)Easy");
 		System.out.println("(2)Medium");
 		System.out.println("(3)Hard");
 		System.out.println("(4)BOSS");
-		int index = getRandomNumber((byte) 3);
+		int index = getRandomNumber((byte) 2);
 		switch (getOption(4)) {
 			case 1:
-				return EASY_ENEMIES[index];
+				return (Enemy) EASY_ENEMIES[index].clone();
 			case 2:
-				return MEDIUM_ENEMIES[index];
+				return (Enemy) MEDIUM_ENEMIES[index].clone();
 			case 3:
-				return HARD_ENEMIES[index];
+				return (Enemy) HARD_ENEMIES[index].clone();
 			case 4:
-				return BOSS_ENEMIES[index];
+				return (Enemy) BOSS_ENEMIES[index].clone();
 			default:
 				break;
 		}

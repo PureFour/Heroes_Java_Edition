@@ -12,39 +12,42 @@ import com.dan.modelsAbstract.Item;
 import lombok.Builder;
 import lombok.Getter;
 
-public class Boots extends Item {
+@Getter
+public class Shields extends Item {
 
-	@Getter
-	private byte dexterity;
+	private byte def;
+	private short maxHp;
 
-	public Boots() {
+	public Shields() {
 	}
 
 	@Builder
-	public Boots(int id, String name, int buyValue, int dex) {
-
+	public Shields(int id, String name, int buyValue, int def, int maxHp) {
 		super(id, name, buyValue);
-		this.dexterity = (byte) dex;
+		this.def = (byte) def;
+		this.maxHp = (short) maxHp;
 	}
 
 	@Override
 	public void show() {
 		System.out.println(this);
-		System.out.println("DEX " + this.dexterity);
+		System.out.println("DEF " + this.def);
+		System.out.println("MAX HP " + this.maxHp);
 	}
 
 	public List<Item> init(int offset) throws IOException {
 		ArrayList<Item> list = new ArrayList<>();
-		List<String> bootsNames = getItemsNames("boots");
-		IntStream.range(1, bootsNames.size())
-			.forEach(i -> list.add(new BootsBuilder()
+		List<String> shieldsNames = getItemsNames("shields");
+		IntStream.range(1, shieldsNames.size())
+			.forEach(i -> list.add(new ShieldsBuilder()
 				.id(i + offset)
-				.name(bootsNames.get(i))
+				.name(shieldsNames.get(i))
 				.buyValue(3 * i)
-				.dex(1 + getRandomNumber((byte) i))
+				.def(1 + getRandomNumber((byte) i))
+				.maxHp(15 * getRandomNumber((byte) i) + 5)
 				.build()
 			));
-		setBonus(list, "boots");
+		setBonus(list, "shields");
 		return list;
 	}
 }

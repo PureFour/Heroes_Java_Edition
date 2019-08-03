@@ -12,39 +12,42 @@ import com.dan.modelsAbstract.Item;
 import lombok.Builder;
 import lombok.Getter;
 
-public class Boots extends Item {
+@Getter
+public class Helmets extends Item {
 
-	@Getter
-	private byte dexterity;
+	private byte def;
+	private short vitality;
 
-	public Boots() {
+	public Helmets() {
 	}
 
 	@Builder
-	public Boots(int id, String name, int buyValue, int dex) {
-
+	public Helmets(int id, String name, int buyValue, int def, int vitality) {
 		super(id, name, buyValue);
-		this.dexterity = (byte) dex;
+		this.def = (byte) def;
+		this.vitality = (short) vitality;
 	}
 
 	@Override
 	public void show() {
 		System.out.println(this);
-		System.out.println("DEX " + this.dexterity);
+		System.out.println("DEF " + this.def);
+		System.out.println("VIT " + this.vitality);
 	}
 
 	public List<Item> init(int offset) throws IOException {
 		ArrayList<Item> list = new ArrayList<>();
-		List<String> bootsNames = getItemsNames("boots");
-		IntStream.range(1, bootsNames.size())
-			.forEach(i -> list.add(new BootsBuilder()
+		List<String> helmetsNames = getItemsNames("helmets");
+		IntStream.range(1, helmetsNames.size())
+			.forEach(i -> list.add(new HelmetsBuilder()
 				.id(i + offset)
-				.name(bootsNames.get(i))
+				.name(helmetsNames.get(i))
 				.buyValue(3 * i)
-				.dex(1 + getRandomNumber((byte) i))
+				.def(1 + getRandomNumber((byte) i))
+				.vitality(2 + getRandomNumber((byte) i))
 				.build()
 			));
-		setBonus(list, "boots");
+		setBonus(list, "helmets");
 		return list;
 	}
 }

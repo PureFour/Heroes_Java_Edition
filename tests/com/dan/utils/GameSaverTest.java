@@ -1,32 +1,41 @@
 package com.dan.utils;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static com.dan.utils.GameSaver.changeHeroMenu;
 
 import java.io.IOException;
 
-import com.dan.models.characters.Hero;
 import com.dan.models.characters.Warrior;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class GameSaverTest {
 	Warrior warrior;
-	Hero hero;
+	Warrior warrior2;
 
 	@BeforeEach
 	void setUp() {
 		warrior = new Warrior("dummy");
+		warrior.setGold((short) 0);
+		warrior.setHp((short) 0);
+		warrior.setName("danek");
+		warrior2 = new Warrior("cwel");
+		warrior2.setGold((short) 10);
 	}
 
 	@Test
 	void saveTest() {
-		GameSaver.saveCharacterAsJSON(warrior);
+		GameSaver.saveCharacter(warrior);
 	}
 
 	@Test
 	void loadTest() throws IOException {
-		GameSaver.loadCharacterAsJSON(hero, "daniel");
-		System.out.println("Hero name -> " + hero.getName());
+//		warrior2 = (Warrior) GameSaver.loadCharacter("dummy");
+		System.out.println(warrior2.getName());
+	}
+
+	@Test
+	void changeHeroMenuTest() {
+//		changeHeroMenu(warrior);
 	}
 }
 

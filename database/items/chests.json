@@ -1,0 +1,41 @@
+{
+  "names": [
+    "Greatplate of Infinite Fire",
+    "Chestpiece of Blind Wars",
+    "Golden Armor of Infinite Fortunes",
+    "Steel Breastplate of Damned Memories",
+    "Malignant Bronze Armor",
+    "Wrathful Steel Chestguard",
+    "Jade Infused Cuirass of Infinite Trials",
+    "Remorse Breastplate of Suffering",
+    "Pact of Justice",
+    "Legacy of the World",
+    "Armor of Fallen Visions",
+    "Armor of Divine Voices",
+    "Golden Batteplate of Doomed Lands",
+    "Silver Chestplate of Ending Bloodlust",
+    "Defender Chainmail Cuirass",
+    "Chainmail Chestplate",
+    "Protector's Tunic of Clarity",
+    "Incarnated Breastplate of Eternity",
+    "Soul of Ending Misery",
+    "Armament of Valor"
+  ],
+  "bonuses": [
+    {
+      "name": "hard",
+      "field": "def",
+      "value": 3
+    },
+    {
+      "name": "noname",
+      "field": "luck",
+      "value": 2
+    },
+    {
+      "name": "strong",
+      "field": "ad",
+      "value": 5
+    }
+  ]
+}

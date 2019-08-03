@@ -1,0 +1,41 @@
+{
+  "names": [
+    "The Iron Maid",
+    "Tranquility",
+    "Willbreaker",
+    "Malevolent Guard",
+    "Defender's Oak Shield",
+    "Barbaric Mithril Protector",
+    "Thundersoul Golden Buckler",
+    "Truthbreaker",
+    "Thunderfury Bronze Defender",
+    "Lost Paradise, Deflector of Corruption",
+    "The Barricade, Heater of Agony",
+    "Firesoul Steel Bulwark",
+    "The Shadow, Wit of the Emperor",
+    "Blazeguard, Breaker of Lost Voices",
+    "Deluded Iron Blockade",
+    "The Shadow, Shepherd of the Dead",
+    "Eternal Redwood Shield Wall",
+    "Peacekeeper Keeper",
+    "Nightmare Golden Aegis",
+    "Polished Light Shield"
+  ],
+  "bonuses": [
+    {
+      "name": "hard",
+      "field": "def",
+      "value": 3
+    },
+    {
+      "name": "noname",
+      "field": "luck",
+      "value": 2
+    },
+    {
+      "name": "strong",
+      "field": "ad",
+      "value": 5
+    }
+  ]
+}

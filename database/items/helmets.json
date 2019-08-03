@@ -1,0 +1,41 @@
+{
+  "names": [
+    "Gaze of Cursed Fortune",
+    "Headcover of Immortal Fortune",
+    "Steel Casque of Lost Hells",
+    "Skeletal Visage of Sacred Torment",
+    "Soulless Bone Headcover",
+    "Ghost-Forged Bronze Headguard",
+    "Legionnaire's Headguard of Decay",
+    "Thundersoul Casque of the Moonwalker",
+    "Ivory Helm",
+    "Ghost-Forged Greathelm of Light's Hope",
+    "Yearning Headcover of Mists",
+    "Champion's Cap of the Phoenix",
+    "Hopeless Heavy Hide Helm",
+    "Blazeguard, Breaker of Lost Voices",
+    "Quilted Helm of Silent Worlds",
+    "Bandana of Infernal Bloodlust",
+    "Barbaric Hood of Arcane Magic",
+    "Hide Bandana",
+    "Recruit's Helm of Lost Worlds",
+    "Facemask of Dreams"
+  ],
+  "bonuses": [
+    {
+      "name": "noname",
+      "field": "def",
+      "value": 3
+    },
+    {
+      "name": "noname",
+      "field": "luck",
+      "value": 2
+    },
+    {
+      "name": "strong",
+      "field": "ad",
+      "value": 5
+    }
+  ]
+}

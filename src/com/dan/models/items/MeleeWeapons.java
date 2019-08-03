@@ -1,8 +1,6 @@
 package com.dan.models.items;
 
-import static com.dan.utils.FunctionHelper.getChance;
 import static com.dan.utils.FunctionHelper.getRandomNumber;
-import static com.dan.utils.JsonParser.getItemsBonus;
 import static com.dan.utils.JsonParser.getItemsNames;
 
 import java.io.IOException;
@@ -46,16 +44,7 @@ public class MeleeWeapons extends Item {
 					.ad(i + 5 + getRandomNumber((byte) i) + 3 * hero.getLvl())
 					.build()
 				));
-		list.stream()
-			.filter(item -> getChance(item.getBuyValue()))
-			.forEach(item -> {
-				try {
-					item.setBonus(getItemsBonus("swords"));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			});
-
+		setBonus(list, "swords");
 		return list;
 	}
 }

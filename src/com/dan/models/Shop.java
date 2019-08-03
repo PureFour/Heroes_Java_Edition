@@ -4,11 +4,15 @@ import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getOption;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 import com.dan.models.characters.Hero;
 import com.dan.models.items.Boots;
+import com.dan.models.items.Helmets;
 import com.dan.models.items.MeleeWeapons;
+import com.dan.models.items.Potions;
+import com.dan.models.items.Shields;
 import com.dan.modelsAbstract.Item;
 import com.dan.modelsAbstract.ItemStorage;
 import lombok.Getter;
@@ -62,28 +66,24 @@ public class Shop implements ItemStorage {
 		System.out.println("(10)GO BACK");
 		switch (getOption(10)) {
 			case 1:
-				System.out.println("Melee weapons: ");
-				this.storage.values().stream()
-					.filter(item -> item instanceof MeleeWeapons)
-					.forEach(Item::show);
+				getItemsByType(MeleeWeapons.class);
 				break;
 			case 2:
 				break;
 			case 3:
 				break;
 			case 4:
+				getItemsByType(Helmets.class);
 				break;
 			case 5:
 				break;
 			case 6:
-				System.out.println("Boots: ");
-				this.storage.values().stream()
-					.filter(item -> item instanceof Boots)
-					.forEach(Item::show);
+				getItemsByType(Boots.class);
 				break;
 			case 7:
 				break;
 			case 8:
+				getItemsByType(Potions.class);
 				break;
 			case 9:
 				break;
@@ -95,9 +95,16 @@ public class Shop implements ItemStorage {
 		buy(hero);
 	}
 
+	private void getItemsByType(Class type) {
+		System.out.println(type.getName() + " :");
+		this.storage.values().stream()
+			.filter(type::isInstance)
+			.forEach(Item::show);
+	}
+
 	private void buy(Hero hero) {
 		System.out.println("What do you want to buy? (Enter index number)");
-		int index = getOption(this.storage.size());
+		int index = getOption(); // zmienione z getOptions(options) ! ! !
 		Item tmp = getItem(index);
 		if (tmp != null) {
 			System.out.println("Item " + tmp.getName());
@@ -156,6 +163,10 @@ public class Shop implements ItemStorage {
 		try {
 			addItems(new MeleeWeapons().init(0, hero));
 			addItems(new Boots().init(this.storage.size()));
+			addItems(new Shields().init(this.storage.size()));
+			addItems(new Helmets().init(this.storage.size()));
+
+			addItems(new Potions().init());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

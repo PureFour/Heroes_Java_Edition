@@ -20,5 +20,22 @@
     "Fearful Footguards of the Corrupted",
     "Crazed Greaves of Broken Families",
     "Corrupted Spurs of Vengeance"
+  ],
+  "bonuses": [
+    {
+      "name": "hard",
+      "field": "def",
+      "value": 3
+    },
+    {
+      "name": "noname",
+      "field": "luck",
+      "value": 2
+    },
+    {
+      "name": "strong",
+      "field": "ad",
+      "value": 5
+    }
   ]
 }

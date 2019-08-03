@@ -14,6 +14,9 @@ public class Inventory implements ItemStorage, Serializable {
 	private HashMap<Byte, Item> storage;
 	private byte maxSize;
 
+	public Inventory() {
+	}
+
 	public Inventory(int maxSize) {
 		this.storage = new HashMap<>(maxSize); //ciekawe czy potem mozna powiekszyc
 		this.maxSize = (byte) maxSize;
