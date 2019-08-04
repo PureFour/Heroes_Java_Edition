@@ -10,7 +10,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class JsonParser { //TODO zmienic nazwy jsonow !
-	private final static String ITEMS_JPATH = "database/items/";
+	private final static String ITEMS_JPATH = "src/com/dan/resources/items/";
 
 	public static List<String> getItemsNames(String itemName) throws IOException {
 		String content = new String(Files.readAllBytes(Paths.get(ITEMS_JPATH + itemName + ".json")));

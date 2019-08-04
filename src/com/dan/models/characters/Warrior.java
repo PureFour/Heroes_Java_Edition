@@ -32,7 +32,7 @@ public class Warrior extends Hero implements Fight<Enemy> {
 		defence = randomizeAttribute(enemy.getDef());
 		attack = randomizeAttribute(this.ad);
 		System.out.println(this.name + " (Warrior) is performing attack!");
-		System.out.println(enemy.getName() + " DEF = " + defence);
+//		System.out.println(enemy.getName() + " DEF = " + defence);
 		if (attack > defence) {
 			damage = (byte) (attack - defence);
 			if (isCritical(luck)) {

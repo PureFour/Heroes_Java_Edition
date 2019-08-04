@@ -1,5 +1,7 @@
 package com.dan.models.items;
 
+import static com.dan.models.Game.WIDTH;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class Potions extends Item {
 
 	@Builder
 	public Potions(int id, String name, int buyValue, int hp, int mana) {
-		super(id, name, buyValue);
+		super(id, name, 0, buyValue);
 		this.hp = (byte) hp;
 		this.mana = (short) mana;
 	}
@@ -26,8 +28,12 @@ public class Potions extends Item {
 	@Override
 	public void show() {
 		System.out.println(this);
-		System.out.println("HP " + this.hp);
-		System.out.println("MANA " + this.mana);
+		if (this.hp > 0) {
+			System.out.format("%-50s%n", " ".repeat(50) + "HP +" + this.hp);
+		} else {
+			System.out.format("%-50s%n", " ".repeat(50) + "MANA +" + this.mana);
+		}
+		System.out.println("=".repeat(WIDTH) + '\n');
 	}
 
 	public List<Item> init() {

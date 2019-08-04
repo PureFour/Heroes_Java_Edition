@@ -28,9 +28,9 @@ public class Shop implements ItemStorage {
 	public void menu(Hero hero) {
 		boolean running = true;
 		while (running) {
-			System.out.println("=".repeat(WIDTH) + "\n");
-			System.out.println(" ".repeat(30) + "Welcome in my shop!\n");
-			System.out.println("=".repeat(WIDTH) + "\n");
+			System.out.println("=".repeat(WIDTH));
+			System.out.println(" ".repeat(WIDTH / 2 - 9) + "Welcome in my shop!");
+			System.out.println("=".repeat(WIDTH));
 			System.out.println("What do you want? YOUR GOLD: " + hero.getGold());
 			System.out.println("(1) BUY ITEMS");
 			System.out.println("(2) SELL ITEMS");

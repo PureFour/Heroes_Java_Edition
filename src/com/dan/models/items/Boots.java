@@ -1,5 +1,6 @@
 package com.dan.models.items;
 
+import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getRandomNumber;
 import static com.dan.utils.JsonParser.getItemsNames;
 
@@ -22,15 +23,15 @@ public class Boots extends Item {
 
 	@Builder
 	public Boots(int id, String name, int buyValue, int dex) {
-
-		super(id, name, buyValue);
+		super(id, name, 0, buyValue);
 		this.dexterity = (byte) dex;
 	}
 
 	@Override
 	public void show() {
 		System.out.println(this);
-		System.out.println("DEX " + this.dexterity);
+		System.out.format("%-50s%n", " ".repeat(50) + "DEX +" + this.dexterity);
+		System.out.println("=".repeat(WIDTH) + '\n');
 	}
 
 	public List<Item> init(int offset) throws IOException {

@@ -1,5 +1,6 @@
 package com.dan.modelsAbstract;
 
+import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getChance;
 import static com.dan.utils.JsonParser.getItemsBonus;
 
@@ -17,6 +18,7 @@ public abstract class Item implements Serializable {
 
 	private byte id = 0;
 	private String name = "unknown";
+	private byte lvl; // +0 +1 +2 ...
 	private short buyValue;
 	private short sellValue;
 	@Setter
@@ -55,12 +57,14 @@ public abstract class Item implements Serializable {
 				}
 			});
 	}
+
 	public Item() {
 	}
 
-	public Item(int id, String name, int buyValue) {
+	public Item(int id, String name, int lvl, int buyValue) {
 		this.id = (byte) id;
 		this.name = name;
+		this.lvl = (byte) lvl;
 		this.buyValue = (short) buyValue;
 		this.sellValue = (short) (buyValue / 2);
 	}
@@ -70,10 +74,10 @@ public abstract class Item implements Serializable {
 	@Override
 	public String toString() {
 		return
-			"=".repeat(50) + '\n' +
-				"Item id: " + getId() +
-				"\nItem name: " + getName() +
-				(bonus != null ? "\nBONUS: " + getBonus() : "") +
-				"\nItem price: " + getBuyValue();
+			"=".repeat(WIDTH) + '\n' +
+				String.format("%-50s%n", " ".repeat(50) + "Item id: " + getId()) +
+				String.format("%-50s%n", " ".repeat(50) + "Item name: " + getName() + (getLvl() > 0 ? " +" + getLvl() : "")) +
+				String.format("%-50s", " ".repeat(50) + "Item price: " + getBuyValue()) +
+				(bonus != null ? String.format("%n%-50s", " ".repeat(50) + "BONUS: " + getBonus()) : "");
 	}
 }

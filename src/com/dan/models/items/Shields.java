@@ -1,5 +1,6 @@
 package com.dan.models.items;
 
+import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getRandomNumber;
 import static com.dan.utils.JsonParser.getItemsNames;
 
@@ -23,7 +24,7 @@ public class Shields extends Item {
 
 	@Builder
 	public Shields(int id, String name, int buyValue, int def, int maxHp) {
-		super(id, name, buyValue);
+		super(id, name, 0, buyValue);
 		this.def = (byte) def;
 		this.maxHp = (short) maxHp;
 	}
@@ -31,8 +32,9 @@ public class Shields extends Item {
 	@Override
 	public void show() {
 		System.out.println(this);
-		System.out.println("DEF " + this.def);
-		System.out.println("MAX HP " + this.maxHp);
+		System.out.format("%-50s%n", " ".repeat(50) + "DEF +" + this.def);
+		System.out.format("%-50s%n", " ".repeat(50) + "MAX_HP +" + this.maxHp);
+		System.out.println("=".repeat(WIDTH) + '\n');
 	}
 
 	public List<Item> init(int offset) throws IOException {

@@ -1,5 +1,6 @@
 package com.dan.models.items;
 
+import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getRandomNumber;
 import static com.dan.utils.JsonParser.getItemsNames;
 
@@ -23,7 +24,7 @@ public class Helmets extends Item {
 
 	@Builder
 	public Helmets(int id, String name, int buyValue, int def, int vitality) {
-		super(id, name, buyValue);
+		super(id, name, 0, buyValue);
 		this.def = (byte) def;
 		this.vitality = (short) vitality;
 	}
@@ -31,8 +32,9 @@ public class Helmets extends Item {
 	@Override
 	public void show() {
 		System.out.println(this);
-		System.out.println("DEF " + this.def);
-		System.out.println("VIT " + this.vitality);
+		System.out.format("%-50s%n", " ".repeat(50) + "DEF +" + this.def);
+		System.out.format("%-50s%n", " ".repeat(50) + "VIT +" + this.vitality);
+		System.out.println("=".repeat(WIDTH) + '\n');
 	}
 
 	public List<Item> init(int offset) throws IOException {

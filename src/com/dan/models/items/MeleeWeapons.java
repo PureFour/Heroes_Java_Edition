@@ -1,5 +1,6 @@
 package com.dan.models.items;
 
+import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getRandomNumber;
 import static com.dan.utils.JsonParser.getItemsNames;
 
@@ -20,7 +21,7 @@ public class MeleeWeapons extends Item {
 
 	@Builder
 	public MeleeWeapons(int id, String name, int buyValue, int ad) {
-		super(id, name, buyValue);
+		super(id, name, 0, buyValue);
 		this.ad = (byte) ad;
 	}
 
@@ -29,7 +30,8 @@ public class MeleeWeapons extends Item {
 
 	public void show() {
 		System.out.println(this);
-		System.out.println("AD " + this.ad);
+		System.out.format("%-50s%n", " ".repeat(50) + "AD +" + this.ad);
+		System.out.println("=".repeat(WIDTH) + '\n');
 	}
 
 	public List<Item> init(int offset, Hero hero) throws IOException {

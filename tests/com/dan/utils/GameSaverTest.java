@@ -29,13 +29,13 @@ class GameSaverTest {
 
 	@Test
 	void loadTest() throws IOException {
-//		warrior2 = (Warrior) GameSaver.loadCharacter("dummy");
-		System.out.println(warrior2.getName());
+//		warrior2 = (Warrior) GameSaver.loadCharacter("daniel");
+//		System.out.println(warrior2.getName());
 	}
 
 	@Test
 	void changeHeroMenuTest() {
-//		changeHeroMenu(warrior);
+		changeHeroMenu();
 	}
 }
 

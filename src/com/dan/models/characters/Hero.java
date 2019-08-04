@@ -28,8 +28,8 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 	@Setter
 	short hp;
 	short maxHp;
-	byte mana;
-	byte maxMana;
+	short mana;
+	short maxMana;
 	byte ad;
 	byte ap; //magic DMG
 	byte def;
@@ -106,7 +106,7 @@ public abstract class Hero implements Fight<Enemy>, Serializable {
 
 	public void equip(Item item) {
 		Item tmp;
-		if ((tmp = this.equipment.getItemWithTheSameType(item.getClass())) != null) { // TU!
+		if ((tmp = this.equipment.getItemWithTheSameType(item.getClass())) != null) {
 			this.unEquip(tmp);
 		}
 		System.out.println("Equipping an item ...");

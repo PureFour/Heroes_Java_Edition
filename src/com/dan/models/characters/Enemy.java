@@ -1,5 +1,6 @@
 package com.dan.models.characters;
 
+import static com.dan.models.Game.WIDTH;
 import static com.dan.utils.FunctionHelper.getOption;
 import static com.dan.utils.FunctionHelper.getRandomNumber;
 import static com.dan.utils.FunctionHelper.randomizeAttribute;
@@ -12,9 +13,9 @@ import lombok.Setter;
 public class Enemy implements Fight<Hero>, Cloneable {
 	//static arrays with sample enemies
 	public final static Enemy[] EASY_ENEMIES = { //public for tests only ...
-		new Enemy("Dog", (short) 10, (byte) 5, (byte) 5, (byte) 1, (byte) 1, (short) 10, (short) 10),
-		new Enemy("Swarm of wasp", (short) 20, (byte) 8, (byte) 6, (byte) 2, (byte) 1, (short) 15, (short) 15),
-		new Enemy("Bat", (short) 10, (byte) 5, (byte) 5, (byte) 1, (byte) 3, (short) 20, (short) 15),
+		new Enemy("Dog", (short) 10, (byte) 50, (byte) 5, (byte) 1, (byte) 1, (short) 10, (short) 10),
+		new Enemy("Swarm of wasp", (short) 200, (byte) 8, (byte) 6, (byte) 2, (byte) 1, (short) 15, (short) 15),
+		new Enemy("Bat", (short) 10, (byte) 50, (byte) 5, (byte) 1, (byte) 3, (short) 20, (short) 15),
 	};
 	private final static Enemy[] MEDIUM_ENEMIES = {
 		new Enemy("Orc", (short) 30, (byte) 10, (byte) 8, (byte) 3, (byte) 1, (short) 10, (short) 10),
@@ -87,18 +88,18 @@ public class Enemy implements Fight<Hero>, Cloneable {
 	public void attack(Hero hero) {
 		byte damage, defence, attack;
 		short HP = hero.getHp();
-
+		int var = 60;
 		defence = randomizeAttribute(hero.getDef());
 		attack = randomizeAttribute(this.ad);
-		System.out.println(" ".repeat(30) + this.name + " is attacking you!");
-		System.out.println(" ".repeat(30) + "My DEF = " + defence);
+		System.out.println(" ".repeat(var) + this.name + " is attacking you!");
+//		System.out.println(" ".repeat(var) + "My DEF = " + defence);
 		if (attack > defence) {
 			damage = (byte) (attack - defence);
 			if (isCritical(luck)) {
 				damage *= 2;
-				System.out.println(" ".repeat(30) + "Critical HIT!: " + damage);
+				System.out.println(" ".repeat(var) + "Critical HIT!: " + damage);
 			} else {
-				System.out.println(" ".repeat(30) + "Enemy DMG= " + damage);
+				System.out.println(" ".repeat(var) + "Enemy DMG= " + damage);
 			}
 			if (damage < HP) {
 				hero.setHp((byte) (HP - damage));
@@ -106,7 +107,7 @@ public class Enemy implements Fight<Hero>, Cloneable {
 				hero.setHp((byte) 0);
 			}
 		} else {
-			System.out.println(" ".repeat(30) + name + " missed!");
+			System.out.println(" ".repeat(var) + name + " missed!");
 		}
 	}
 }
